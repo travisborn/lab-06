@@ -12,12 +12,11 @@ public class CityList {
 
     /**
      * This method adds a City type object to the cities list.
-     *
-     * @param city: the object to add
+     * @param city the object to add
      */
     public void add(City city) {
         if (cities.contains(city))
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(city + " already exists.");
         cities.add(city);
     }
 
@@ -26,17 +25,37 @@ public class CityList {
      * @return Return the sorted list
      */
     public List<City> getCities() {
-        List<City> list = cities;
+        List<City> list = new ArrayList<>(cities);
         Collections.sort(list);
         return list;
     }
 
     /**
-     * implement the hasCity method, may need to override the equalsTo method.
-     * When given a city, return whether or not it belongs in the list.
+     * Returns whether or not a city is present in the list.
+     * @param city city to check if it's in the list.
+     * @return true if the city is in the list and false if not.
      */
     public boolean hasCity(City city){
+        return cities.contains(city);
+    }
 
+    /**
+     * Deletes the city if it is in the list, otherwise throw exception.
+     * @param city city to be deleted.
+     */
+    public void delete(City city){
+        if (!cities.contains(city)){
+            throw new IllegalArgumentException(city + " not found.");
+        }
+        cities.remove(city);
+    }
+
+    /**
+     * Will return the number of cities in the list.
+     * @return size of cities array for the count of cities.
+     */
+    public int countCities(){
+        return cities.size();
     }
 }
 
